@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAO APP - Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar with contacts -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>ZAO APP</h2>
+                <div class="user-info">
+                    <span id="userName">User</span>
+                    <button onclick="logout()" class="logout-btn">Logout</button>
+                </div>
+            </div>
+            
+            <div class="contacts-search">
+                <input type="text" id="contactSearch" placeholder="Search contacts...">
+            </div>
+            
+            <div class="contacts-list" id="contactsList">
+                <!-- Contacts will be loaded here -->
+            </div>
+            
+            <div class="add-contact">
+                <button onclick="showAddContact()" class="add-contact-btn">Add Contact</button>
+            </div>
+        </div>
+        
+        <!-- Main chat area -->
+        <div class="chat-main">
+            <div class="chat-header" id="chatHeader">
+                <div class="chat-user-info">
+                    <span id="currentChatUser">Select a contact to start chatting</span>
+                </div>
+            </div>
+            
+            <div class="messages-container" id="messagesContainer">
+                <!-- Messages will be displayed here -->
+            </div>
+            
+            <div class="message-input-container">
+                <div class="message-input">
+                    <input type="text" id="messageInput" placeholder="Type a message..." disabled>
+                    <button onclick="sendMessage()" id="sendButton" disabled>Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Contact Modal -->
+    <div class="modal hidden" id="addContactModal">
+        <div class="modal-content">
+            <h3>Add Contact</h3>
+            <input type="email" id="contactEmail" placeholder="Contact's email">
+            <div class="modal-buttons">
+                <button onclick="addContact()">Add</button>
+                <button onclick="hideAddContact()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
