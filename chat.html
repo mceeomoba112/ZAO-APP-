@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZAO APP - Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="chat-container">
+    <div class="sidebar">
+      <h2>Contacts</h2>
+      <div id="contactsList"></div>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="chat-main">
+      <h2 id="currentChatUser">Select a contact</h2>
+      <div id="messagesContainer" class="messages-container"></div>
+
+      <div class="chat-input">
+        <input type="text" id="messageInput" placeholder="Type a message..." disabled>
+        <input type="file" id="mediaInput" accept="image/*,video/*">
+        <button id="sendButton" disabled onclick="sendMessage()">Send</button>
+        <button onclick="sendMedia(document.getElementById('mediaInput').files[0])">Upload</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
