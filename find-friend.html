@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAO APP - Find Friends</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="find-friends-premium">
+        <!-- Premium Header -->
+        <div class="premium-header">
+            <div class="header-background">
+                <div class="gradient-overlay"></div>
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </div>
+            <div class="header-content">
+                <button class="premium-back-btn" onclick="goBackToChat()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="header-text">
+                    <h1 class="premium-title">
+                        <span class="title-gradient">Discover</span> Friends
+                    </h1>
+                    <p class="premium-subtitle">Connect with people around the world using ZAO usernames</p>
+                </div>
+                <div class="premium-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">2.5M+</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Search Section -->
+        <div class="premium-search-container">
+            <div class="search-card">
+                <div class="search-header">
+                    <div class="search-icon-wrapper">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                    <div>
+                        <h3 class="search-title">Find by Username</h3>
+                        <p class="search-description">Search for friends using their unique ZAO- username</p>
+                    </div>
+                </div>
+
+                <div class="premium-search-input">
+                    <div class="input-wrapper">
+                        <div class="input-prefix">ZAO-</div>
+                        <input 
+                            type="text" 
+                            id="usernameSearch" 
+                            placeholder="Enter username without ZAO- prefix"
+                            autocomplete="off"
+                            oninput="handleSearchInput()"
+                            onkeypress="handleEnterKey(event)"
+                        >
+                        <button class="clear-input-btn" onclick="clearSearch()" id="clearBtn" style="display: none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <button class="premium-search-btn" onclick="searchUserByUsername()" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                    </button>
+                </div>
+
+                <div class="search-suggestions" id="searchSuggestions">
+                    <div class="suggestions-header">
+                        <i class="fas fa-history"></i>
+                        <span>Recent Searches</span>
+                    </div>
+                    <div class="recent-searches-grid" id="recentSearches">
+                        <div class="no-recent">No recent searches</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Results -->
+        <div class="search-results-container" id="searchResults">
+            <div class="search-placeholder-premium">
+                <div class="placeholder-animation">
+                    <div class="pulse-ring"></div>
+                    <div class="user-icon-large">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+                <h3 class="placeholder-title">Ready to Connect?</h3>
+                <p class="placeholder-text">Start typing a username to discover amazing people on ZAO</p>
+                <div class="username-format-card">
+                    <div class="format-header">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Username Format</span>
+                    </div>
+                    <div class="format-example">
+                        <span class="format-prefix">ZAO-</span>
+                        <span class="format-suffix">USERNAME</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Features Section -->
+        <div class="premium-features">
+            <div class="features-grid">
+                <div class="feature-card" onclick="shareMyUsername()">
+                    <div class="feature-icon share-gradient">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h4>Share Username</h4>
+                    <p>Let others find you easily</p>
+                    <div class="feature-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div class="feature-card" onclick="showNearbyUsers()">
+                    <div class="feature-icon location-gradient">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4>People Nearby</h4>
+                    <p>Discover local connections</p>
+                    <div class="feature-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div class="feature-card" onclick="generateInviteCode()">
+                    <div class="feature-icon invite-gradient">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h4>Invite Code</h4>
+                    <p>Earn $75 for 5 invites</p>
+                    <div class="feature-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div class="feature-card" onclick="importContacts()">
+                    <div class="feature-icon contacts-gradient">
+                        <i class="fas fa-address-book"></i>
+                    </div>
+                    <h4>Import Contacts</h4>
+                    <p>Find friends from your phone</p>
+                    <div class="feature-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="premium-tips">
+            <div class="tips-header">
+                <div class="tips-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Pro Tips for Finding Friends</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <div class="tip-number">1</div>
+                    <div class="tip-content">
+                        <h4>Username Structure</h4>
+                        <p>All ZAO usernames start with "ZAO-" followed by 4-12 characters</p>
+                    </div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-number">2</div>
+                    <div class="tip-content">
+                        <h4>Case Insensitive</h4>
+                        <p>Search works regardless of uppercase or lowercase letters</p>
+                    </div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-number">3</div>
+                    <div class="tip-content">
+                        <h4>Unique Identifiers</h4>
+                        <p>Every user has a unique username - no duplicates allowed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script type="module" src="script.js"></script>
+    <script>
+        let searchTimeout;
+
+        function goBackToChat() {
+            window.location.href = 'chat.html';
+        }
+
+        function handleSearchInput() {
+            const input = document.getElementById('usernameSearch');
+            const clearBtn = document.getElementById('clearBtn');
+            const searchBtn = document.getElementById('searchBtn');
+
+            if (input.value.trim()) {
+                clearBtn.style.display = 'flex';
+                searchBtn.disabled = false;
+                searchBtn.classList.add('active');
+            } else {
+                clearBtn.style.display = 'none';
+                searchBtn.disabled = false;
+                searchBtn.classList.remove('active');
+            }
+
+            // Auto-search with debounce
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                if (input.value.trim().length > 2) {
+                    searchUserByUsername();
+                }
+            }, 800);
+        }
+
+        function handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                searchUserByUsername();
+            }
+        }
+
+        function clearSearch() {
+            const input = document.getElementById('usernameSearch');
+            const clearBtn = document.getElementById('clearBtn');
+            const searchResults = document.getElementById('searchResults');
+
+            input.value = '';
+            clearBtn.style.display = 'none';
+
+            searchResults.innerHTML = `
+                <div class="search-placeholder-premium">
+                    <div class="placeholder-animation">
+                        <div class="pulse-ring"></div>
+                        <div class="user-icon-large">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <h3 class="placeholder-title">Ready to Connect?</h3>
+                    <p class="placeholder-text">Start typing a username to discover amazing people on ZAO</p>
+                    <div class="username-format-card">
+                        <div class="format-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Username Format</span>
+                        </div>
+                        <div class="format-example">
+                            <span class="format-prefix">ZAO-</span>
+                            <span class="format-suffix">USERNAME</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            input.focus();
+        }
+
+        function searchUserByUsername() {
+            const username = ('ZAO-' + document.getElementById('usernameSearch').value.trim()).toUpperCase();
+            const searchResults = document.getElementById('searchResults');
+            const searchBtn = document.getElementById('searchBtn');
+
+            if (!document.getElementById('usernameSearch').value.trim()) {
+                searchResults.innerHTML = `
+                    <div class="search-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Please enter a username</h4>
+                        <p>Type the username without the ZAO- prefix</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Show premium loading state
+            searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Searching...</span>';
+            searchBtn.disabled = true;
+
+            searchResults.innerHTML = `
+                <div class="search-loading-premium">
+                    <div class="loading-spinner">
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-inner"></div>
+                    </div>
+                    <h4>Searching the ZAO network...</h4>
+                    <p>Looking for "${username}"</p>
+                </div>
+            `;
+
+            // Save to recent searches
+            saveRecentSearch(username);
+
+            // Simulate API call
+            setTimeout(() => {
+                searchBtn.innerHTML = '<i class="fas fa-search"></i><span>Search</span>';
+                searchBtn.disabled = false;
+
+                // Mock search results with premium styling
+                const mockUsers = [
+                    { username: username, name: 'Alex Johnson', online: true, location: 'New York, USA', verified: true },
+                    { username: 'ZAO-USER456', name: 'Maria Santos', online: false, location: 'São Paulo, Brazil', verified: false },
+                ];
+
+                const foundUser = mockUsers.find(user => user.username === username);
+
+                if (foundUser) {
+                    searchResults.innerHTML = `
+                        <div class="user-found-premium">
+                            <div class="user-card-premium">
+                                <div class="user-header">
+                                    <div class="user-avatar-large">
+                                        ${foundUser.name.charAt(0)}
+                                        ${foundUser.online ? '<div class="online-pulse"></div>' : ''}
+                                        ${foundUser.verified ? '<div class="verified-badge"><i class="fas fa-check"></i></div>' : ''}
+                                    </div>
+                                    <div class="user-info-premium">
+                                        <h3 class="user-name">${foundUser.name}</h3>
+                                        <p class="user-username">@${foundUser.username}</p>
+                                        <div class="user-status">
+                                            <div class="status-indicator ${foundUser.online ? 'online' : 'offline'}">
+                                                <i class="fas fa-circle"></i>
+                                                ${foundUser.online ? 'Online now' : 'Last seen recently'}
+                                            </div>
+                                            <div class="user-location">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                ${foundUser.location}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="user-actions-premium">
+                                    <button class="add-friend-btn-premium" onclick="addFriend('${foundUser.username}')">
+                                        <i class="fas fa-user-plus"></i>
+                                        <span>Add Friend</span>
+                                    </button>
+                                    <button class="message-btn-premium" onclick="startChat('${foundUser.username}')">
+                                        <i class="fas fa-comment"></i>
+                                        <span>Message</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    searchResults.innerHTML = `
+                        <div class="user-not-found-premium">
+                            <div class="not-found-icon">
+                                <i class="fas fa-user-slash"></i>
+                            </div>
+                            <h3>User Not Found</h3>
+                            <p>No user found with username "${username}"</p>
+                            <div class="suggestion-card">
+                                <h4>Suggestions:</h4>
+                                <ul>
+                                    <li>Check the spelling of the username</li>
+                                    <li>Make sure to include only the part after "ZAO-"</li>
+                                    <li>Ask your friend to share their exact username</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                }
+            }, 2000);
+        }
+
+        function saveRecentSearch(username) {
+            let recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
+            recentSearches = recentSearches.filter(search => search !== username);
+            recentSearches.unshift(username);
+            recentSearches = recentSearches.slice(0, 8);
+            localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+            loadRecentSearches();
+        }
+
+        function loadRecentSearches() {
+            const recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
+            const container = document.getElementById('recentSearches');
+
+            if (recentSearches.length > 0) {
+                container.innerHTML = recentSearches.map(search => 
+                    `<div class="recent-search-chip" onclick="searchRecentUsername('${search}')">
+                        <span>${search}</span>
+                        <i class="fas fa-search"></i>
+                    </div>`
+                ).join('');
+            } else {
+                container.innerHTML = '<div class="no-recent">No recent searches</div>';
+            }
+        }
+
+        function searchRecentUsername(username) {
+            const searchInput = username.replace('ZAO-', '');
+            document.getElementById('usernameSearch').value = searchInput;
+            searchUserByUsername();
+        }
+
+        function addFriend(username) {
+            // Premium notification
+            showPremiumNotification(`Friend request sent to ${username}!`, 'success');
+        }
+
+        function startChat(username) {
+            // Navigate to chat with this user
+            window.location.href = `chat.html?user=${username}`;
+        }
+
+        function shareMyUsername() {
+            const myUsername = localStorage.getItem('userUsername');
+            if (myUsername) {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Connect with me on ZAO',
+                        text: `Add me on ZAO APP! My username is: ${myUsername}`,
+                    });
+                } else {
+                    navigator.clipboard.writeText(myUsername).then(() => {
+                        showPremiumNotification('Username copied to clipboard!', 'success');
+                    });
+                }
+            }
+        }
+
+        function showNearbyUsers() {
+            if (localStorage.getItem('locationPermission') === 'granted') {
+                showPremiumNotification('Finding people nearby...', 'info');
+                // Implement nearby users feature
+            } else {
+                showPremiumNotification('Location permission required to find nearby users', 'warning');
+            }
+        }
+
+        function generateInviteCode() {
+            const inviteCode = 'ZAO-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+            showPremiumNotification(`Invite code: ${inviteCode} - Share to earn $75!`, 'success');
+        }
+
+        function importContacts() {
+            if (localStorage.getItem('contactPermission') === 'supported') {
+                showPremiumNotification('Importing contacts...', 'info');
+                // Implement contact import
+            } else {
+                showPremiumNotification('Contact access not available on this device', 'warning');
+            }
+        }
+
+        function showPremiumNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `premium-notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        // Load recent searches on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadRecentSearches();
+        });
+    </script>
+</body>
+</html>
