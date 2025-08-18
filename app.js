@@ -156,5 +156,10 @@ function switchToLogin() {
     document.getElementById('loginForm').classList.remove('hidden');
 }
 
+// Make functions globally available
+window.switchToSignup = switchToSignup;
+window.switchToLogin = switchToLogin;
+window.logout = logout;
+
 // Export for chat.js if needed
 export { currentUser, uploadMedia, supabase, logout };
