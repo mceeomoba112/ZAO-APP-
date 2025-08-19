@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZAO APP - Chats</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="whatsapp-container">
+    <!-- Left Sidebar - Chat List -->
+    <div class="chat-sidebar">
+      <!-- Sidebar Header -->
+      <div class="sidebar-header">
+        <div class="user-profile-section">
+          <div class="user-avatar" id="userAvatar">
+            <img id="userProfileImage" style="display: none;" />
+            <i class="fas fa-user" id="defaultUserIcon"></i>
+          </div>
+          <div class="user-info">
+            <h3 id="currentUserName">User</h3>
+            <span class="online-status">
+              <i class="fas fa-circle"></i> Online
+            </span>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Enhanced Search -->
+      <div class="search-container">
+        <div class="search-wrapper">
+          <div class="search-input-container">
+            <i class="fas fa-search search-icon"></i>
+            <input
+              type="text"
+              placeholder="Search chats, contacts, messages..."
+              id="searchInput"
+              autocomplete="off"
+            >
+            <button class="search-filter-btn" title="Search Filters">
+              <i class="fas fa-filter"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat List Section -->
+      <div class="chat-list-section">
+        <div class="chat-list-header">
+          <div class="section-tabs">
+            <button class="tab-btn active" data-tab="all">
+              All Chats
+            </button>
+            <button class="tab-btn" data-tab="unread">
+              Unread
+            </button>
+            <button class="tab-btn" data-tab="groups">
+              Groups
+            </button>
+          </div>
+          <button class="new-chat-fab" onclick="openFindFriends()" title="New Chat">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+
+        <!-- Chat List -->
+        <div class="chat-list-section-chats-container" id="contactsList">
+          <!-- Chats will be loaded here -->
+          <div class="no-chats-placeholder">
+            <div class="placeholder-content">
+              <div class="placeholder-animation">
+                <i class="fas fa-comments placeholder-icon"></i>
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring delay-1"></div>
+                <div class="pulse-ring delay-2"></div>
+              </div>
+              <h3>Welcome to ZAO APP!</h3>
+              <p>Start connecting with friends worldwide</p>
+              <div class="action-buttons">
+                <button class="start-chat-btn primary" onclick="openFindFriends()">
+                  <i class="fas fa-plus"></i> Start New Chat
+                </button>
+                <button class="start-chat-btn secondary" onclick="openFindFriends()">
+                  <i class="fas fa-user-friends"></i> Find Friends
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Chat Area -->
+    <div class="chat-conversation">
+      <!-- Welcome Screen for Desktop -->
+      <div class="desktop-welcome-screen">
+        <div class="welcome-content-desktop">
+          <div class="zao-logo-large">
+            <div class="logo-animation">
+              <i class="fas fa-comments"></i>
+              <div class="logo-glow"></div>
+            </div>
+          </div>
+          <h1>Welcome to ZAO APP</h1>
+          <p class="welcome-text-large">
+            Connect with friends and family worldwide<br>
+            Your messages are protected with end-to-end encryption
+          </p>
+          <div class="welcome-features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-lock"></i>
+              </div>
+              <h4>End-to-End Encrypted</h4>
+              <p>Your messages are completely secure</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h4>Group Chats</h4>
+              <p>Chat with up to 50 members</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-globe"></i>
+              </div>
+              <h4>Global Network</h4>
+              <p>Connect with people worldwide</p>
+            </div>
+          </div>
+          <div class="welcome-actions">
+            <button class="welcome-btn primary" onclick="openFindFriends()">
+              <i class="fas fa-user-plus"></i> Add Your First Contact
+            </button>
+            <button class="welcome-btn secondary" onclick="openFindFriends()">
+              <i class="fas fa-search"></i> Discover Friends
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Premium Add Contact Modal -->
+  <div id="addContactModal" class="premium-modal hidden">
+    <div class="premium-modal-overlay" onclick="closeModal('addContactModal')"></div>
+    <div class="premium-modal-content add-contact-modal-enhanced">
+      <div class="modal-glow-effect"></div>
+      <div class="premium-modal-header">
+        <div class="modal-title-section">
+          <div class="title-icon-wrapper">
+            <i class="fas fa-user-plus"></i>
+            <div class="icon-pulse"></div>
+          </div>
+          <div class="title-content">
+            <h3>Add New Contact</h3>
+            <p>Connect with friends on ZAO APP</p>
+          </div>
+        </div>
+        <button class="premium-modal-close" onclick="closeModal('addContactModal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="premium-modal-body">
+        <div class="add-contact-hero">
+          <div class="hero-background">
+            <div class="hero-gradient"></div>
+            <div class="floating-particles">
+              <div class="particle"></div>
+              <div class="particle"></div>
+              <div class="particle"></div>
+            </div>
+          </div>
+          <div class="hero-content">
+            <div class="hero-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h4>Start Connecting</h4>
+            <p>Find and add friends to start chatting securely</p>
+          </div>
+        </div>
+
+        <div class="add-contact-options-enhanced">
+          <div class="contact-option-enhanced email-option" onclick="showEmailInput()">
+            <div class="option-background"></div>
+            <div class="option-ripple"></div>
+            <div class="option-icon-enhanced email-gradient">
+              <i class="fas fa-envelope"></i>
+              <div class="icon-shine"></div>
+            </div>
+            <div class="option-content-enhanced">
+              <h4>Add by Email</h4>
+              <p>Enter their email address</p>
+              <div class="option-stats">
+                <span><i class="fas fa-clock"></i> Instant</span>
+              </div>
+            </div>
+            <div class="option-arrow-enhanced">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+
+          <div class="contact-option-enhanced username-option" onclick="showUsernameInput()">
+            <div class="option-background"></div>
+            <div class="option-ripple"></div>
+            <div class="option-icon-enhanced username-gradient">
+              <i class="fas fa-at"></i>
+              <div class="icon-shine"></div>
+            </div>
+            <div class="option-content-enhanced">
+              <h4>Add by Username</h4>
+              <p>Enter their ZAO username</p>
+              <div class="option-stats">
+                <span><i class="fas fa-shield-check"></i> Verified</span>
+              </div>
+            </div>
+            <div class="option-arrow-enhanced">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+
+          <div class="contact-option-enhanced phone-option" onclick="requestPhoneContacts()">
+            <div class="option-background"></div>
+            <div class="option-ripple"></div>
+            <div class="option-icon-enhanced contacts-gradient">
+              <i class="fas fa-address-book"></i>
+              <div class="icon-shine"></div>
+            </div>
+            <div class="option-content-enhanced">
+              <h4>Import from Phone</h4>
+              <p>Sync your phone contacts</p>
+              <div class="option-stats">
+                <span><i class="fas fa-mobile-alt"></i> Coming Soon</span>
+              </div>
+            </div>
+            <div class="option-arrow-enhanced">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="email-input-section-enhanced hidden" id="emailInputSection">
+          <div class="input-header">
+            <button class="back-button" onclick="hideEmailInput()">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="header-text">
+              <h4><i class="fas fa-envelope"></i> Add by Email</h4>
+              <p>Enter the email address of the person you want to add</p>
+            </div>
+          </div>
+          <div class="premium-input-wrapper-enhanced">
+            <div class="input-animation-bg"></div>
+            <div class="input-icon-enhanced">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <input type="email" id="contactEmail" placeholder="Enter email address (e.g., friend@example.com)">
+            <div class="input-border-enhanced"></div>
+            <div class="input-focus-line"></div>
+          </div>
+          <div class="modal-buttons-enhanced">
+            <button class="btn-primary-enhanced" onclick="addContactByEmail()">
+              <div class="btn-glow-enhanced"></div>
+              <div class="btn-shine"></div>
+              <i class="fas fa-plus"></i>
+              <span>Add Contact</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="username-input-section-enhanced hidden" id="usernameInputSection">
+          <div class="input-header">
+            <button class="back-button" onclick="hideUsernameInput()">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="header-text">
+              <h4><i class="fas fa-at"></i> Add by Username</h4>
+              <p>Enter their ZAO username to connect</p>
+            </div>
+          </div>
+          <div class="premium-input-wrapper-enhanced">
+            <div class="input-animation-bg"></div>
+            <div class="input-icon-enhanced">
+              <i class="fas fa-at"></i>
+            </div>
+            <input type="text" id="contactUsername" placeholder="ZAO-USERNAME or USERNAME">
+            <div class="input-border-enhanced"></div>
+            <div class="input-focus-line"></div>
+          </div>
+          <div class="input-help">
+            <i class="fas fa-info-circle"></i>
+            <span>You can enter with or without the "ZAO-" prefix</span>
+          </div>
+          <div class="modal-buttons-enhanced">
+            <button class="btn-primary-enhanced" onclick="addContactByUsername()">
+              <div class="btn-glow-enhanced"></div>
+              <div class="btn-shine"></div>
+              <i class="fas fa-plus"></i>
+              <span>Add Contact</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation - Only on chat-list.html -->
+  <div class="bottom-navigation" style="display: flex !important; position: fixed !important; bottom: 0 !important; z-index: 9999 !important;">
+    <button class="nav-btn active" onclick="window.location.href='chat-list.html'" data-nav="chats">
+      <i class="fas fa-comments"></i>
+      <span>Chats</span>
+    </button>
+    <button class="nav-btn" onclick="openFindFriends()" data-nav="find-friends">
+      <i class="fas fa-user-friends"></i>
+      <span>Find Friends</span>
+    </button>
+    <button class="nav-btn" onclick="openSettings()" data-nav="settings">
+      <i class="fas fa-cog"></i>
+      <span>Settings</span>
+    </button>
+    <button class="nav-btn" onclick="logout()" data-nav="logout">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <script type="module" src="script.js"></script>
+
+  <script>
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      // Small delay to ensure scripts are loaded
+      setTimeout(() => {
+        if (window.permissionManager) {
+          window.permissionManager.checkAndRequestPermissions();
+        }
+      }, 1000);
+    });
+
+    // Tab switching
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const tab = btn.dataset.tab;
+          filterChats(tab);
+        });
+      });
+
+      // Add ripple effect to contact options
+      const contactOptions = document.querySelectorAll('.contact-option-enhanced');
+      contactOptions.forEach(option => {
+        option.addEventListener('click', function(e) {
+          const ripple = this.querySelector('.option-ripple');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = x + 'px';
+          ripple.style.top = y + 'px';
+          ripple.classList.add('animate');
+
+          setTimeout(() => {
+            ripple.classList.remove('animate');
+          }, 600);
+        });
+      });
+    });
+
+    function filterChats(filter) {
+      // Implementation for filtering chats
+      console.log('Filtering chats by:', filter);
+    }
+
+    // Enhanced modal close
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('closing');
+        setTimeout(() => {
+          modal.classList.remove('closing');
+          modal.classList.add('hidden');
+
+          // Reset input sections
+          const emailSection = document.getElementById('emailInputSection');
+          const usernameSection = document.getElementById('usernameInputSection');
+          const optionsSection = document.querySelector('.add-contact-options-enhanced');
+
+          if (emailSection) emailSection.classList.add('hidden');
+          if (usernameSection) usernameSection.classList.add('hidden');
+          if (optionsSection) optionsSection.style.display = 'flex';
+
+          // Clear inputs
+          const emailInput = document.getElementById('contactEmail');
+          const usernameInput = document.getElementById('contactUsername');
+          if (emailInput) emailInput.value = '';
+          if (usernameInput) usernameInput.value = '';
+        }, 300);
+      }
+    }
+
+    // Modal show with animation
+    function showAddContactModal() {
+      const modal = document.getElementById('addContactModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+          modal.classList.add('show');
+        }, 10);
+      }
+    }
+  </script>
+</body>
+</html>

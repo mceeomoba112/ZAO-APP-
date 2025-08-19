@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Friends - ZAO APP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="enhanced-modal-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="find-friends-premium">
+        <!-- Premium Glassy Background -->
+        <div class="premium-background-enhanced">
+            <div class="gradient-overlay-enhanced"></div>
+            <div class="floating-shapes-enhanced">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+            <div class="glass-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+        </div>
+
+        <!-- Premium Header -->
+        <div class="premium-header-enhanced">
+            <div class="header-content-enhanced">
+                <button class="premium-back-btn-enhanced" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                    <div class="btn-glow-ring"></div>
+                </button>
+                <div class="premium-title-section">
+                    <h1 class="premium-title-enhanced">
+                        <span class="title-gradient-enhanced">Find Friends</span>
+                        <div class="title-underline"></div>
+                    </h1>
+                    <p class="premium-subtitle-enhanced">Connect with amazing people worldwide</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Content -->
+        <div class="premium-content-enhanced">
+            <!-- Search Section -->
+            <div class="search-section-premium">
+                <div class="section-header-premium-enhanced">
+                    <div class="section-icon-premium">
+                        <i class="fas fa-search"></i>
+                        <div class="icon-glow"></div>
+                    </div>
+                    <div class="section-title-premium">
+                        <h2>Quick Search</h2>
+                        <p>Find friends instantly by email or username</p>
+                    </div>
+                </div>
+
+                <div class="premium-search-card-enhanced">
+                    <div class="search-wrapper-premium-enhanced">
+                        <div class="search-input-container-premium-enhanced">
+                            <div class="search-icon-premium-enhanced">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <input type="text" id="searchInput" placeholder="Search by email or username..." autocomplete="off">
+                            <button class="search-action-btn-enhanced" onclick="searchUsers()">
+                                <i class="fas fa-arrow-right"></i>
+                                <div class="btn-ripple"></div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="search-results-premium-enhanced" id="searchResults">
+                        <div class="no-results-placeholder-premium-enhanced">
+                            <div class="placeholder-icon-premium-enhanced">
+                                <i class="fas fa-user-friends"></i>
+                                <div class="icon-pulse-ring"></div>
+                            </div>
+                            <h3>Start Your Search</h3>
+                            <p>Enter an email address or ZAO username to find friends</p>
+                            <div class="search-tips-enhanced">
+                                <div class="tip-item-enhanced">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Try: friend@example.com</span>
+                                </div>
+                                <div class="tip-item-enhanced">
+                                    <i class="fas fa-at"></i>
+                                    <span>Try: ZAO-USERNAME</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connection Methods Grouped -->
+            <div class="connection-methods-enhanced">
+                <div class="section-header-premium-enhanced">
+                    <div class="section-icon-premium">
+                        <i class="fas fa-link"></i>
+                        <div class="icon-glow"></div>
+                    </div>
+                    <div class="section-title-premium">
+                        <h2>Connection Methods</h2>
+                        <p>Multiple ways to connect with friends</p>
+                    </div>
+                </div>
+
+                <!-- Direct Connection Group -->
+                <div class="method-group-enhanced">
+                    <div class="group-header-enhanced">
+                        <div class="group-icon-enhanced direct-gradient">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Direct Connection</h3>
+                        <p>Connect instantly using contact information</p>
+                    </div>
+                    <div class="methods-grid-enhanced">
+                        <div class="method-card-enhanced" onclick="showEmailInput()">
+                            <div class="card-glow-enhanced"></div>
+                            <div class="method-icon-enhanced email-gradient">
+                                <i class="fas fa-envelope"></i>
+                                <div class="icon-shine-enhanced"></div>
+                            </div>
+                            <div class="method-content-enhanced">
+                                <h4>Add by Email</h4>
+                                <p>Most reliable way to find friends</p>
+                                <div class="method-badge-enhanced verified">
+                                    <i class="fas fa-shield-check"></i>
+                                    Verified Method
+                                </div>
+                            </div>
+                            <div class="method-arrow-enhanced">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+
+                        <div class="method-card-enhanced" onclick="showUsernameInput()">
+                            <div class="card-glow-enhanced"></div>
+                            <div class="method-icon-enhanced username-gradient">
+                                <i class="fas fa-at"></i>
+                                <div class="icon-shine-enhanced"></div>
+                            </div>
+                            <div class="method-content-enhanced">
+                                <h4>Add by Username</h4>
+                                <p>Quick connect using ZAO username</p>
+                                <div class="method-badge-enhanced username">
+                                    <i class="fas fa-user-check"></i>
+                                    Username Based
+                                </div>
+                            </div>
+                            <div class="method-arrow-enhanced">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sharing Group -->
+                <div class="method-group-enhanced">
+                    <div class="group-header-enhanced">
+                        <div class="group-icon-enhanced share-gradient">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <h3>Share & Connect</h3>
+                        <p>Generate and share your connection details</p>
+                    </div>
+                    <div class="methods-grid-enhanced">
+                        <div class="method-card-enhanced" onclick="showQRCode()">
+                            <div class="card-glow-enhanced"></div>
+                            <div class="method-icon-enhanced qr-gradient">
+                                <i class="fas fa-qrcode"></i>
+                                <div class="icon-shine-enhanced"></div>
+                            </div>
+                            <div class="method-content-enhanced">
+                                <h4>Share QR Code</h4>
+                                <p>Generate personal QR for instant connections</p>
+                                <div class="method-badge-enhanced qr">
+                                    <i class="fas fa-camera"></i>
+                                    Scan & Connect
+                                </div>
+                            </div>
+                            <div class="method-arrow-enhanced">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+
+                        <div class="method-card-enhanced" onclick="generateShareLink()">
+                            <div class="card-glow-enhanced"></div>
+                            <div class="method-icon-enhanced link-gradient">
+                                <i class="fas fa-link"></i>
+                                <div class="icon-shine-enhanced"></div>
+                            </div>
+                            <div class="method-content-enhanced">
+                                <h4>Share Profile Link</h4>
+                                <p>Create shareable link to your profile</p>
+                                <div class="method-badge-enhanced link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Instant Share
+                                </div>
+                            </div>
+                            <div class="method-arrow-enhanced">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discovery Group -->
+                <div class="method-group-enhanced">
+                    <div class="group-header-enhanced">
+                        <div class="group-icon-enhanced discovery-gradient">
+                            <i class="fas fa-compass"></i>
+                        </div>
+                        <h3>Discover People</h3>
+                        <p>Find new connections around you</p>
+                    </div>
+                    <div class="methods-grid-enhanced">
+                        <div class="method-card-enhanced" onclick="requestPhoneContacts()">
+                            <div class="card-glow-enhanced"></div>
+                            <div class="method-icon-enhanced contacts-gradient">
+                                <i class="fas fa-address-book"></i>
+                                <div class="icon-shine-enhanced"></div>
+                            </div>
+                            <div class="method-content-enhanced">
+                                <h4>Import Contacts</h4>
+                                <p>Sync phone contacts to find friends</p>
+                                <div class="method-badge-enhanced contacts">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    Coming Soon
+                                </div>
+                            </div>
+                            <div class="method-arrow-enhanced">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+
+                        <div class="method-card-enhanced" onclick="findNearbyUsers()">
+                            <div class="card-glow-enhanced"></div>
+                            <div class="method-icon-enhanced location-gradient">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="icon-shine-enhanced"></div>
+                            </div>
+                            <div class="method-content-enhanced">
+                                <h4>Discover Nearby</h4>
+                                <p>Find ZAO users in your area</p>
+                                <div class="method-badge-enhanced location">
+                                    <i class="fas fa-location-arrow"></i>
+                                    Location Based
+                                </div>
+                            </div>
+                            <div class="method-arrow-enhanced">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pro Tips Section -->
+            <div class="pro-tips-section-enhanced">
+                <div class="section-header-premium-enhanced">
+                    <div class="section-icon-premium">
+                        <i class="fas fa-lightbulb"></i>
+                        <div class="icon-glow"></div>
+                    </div>
+                    <div class="section-title-premium">
+                        <h2>Pro Tips</h2>
+                        <p>Get the most out of ZAO APP connections</p>
+                    </div>
+                </div>
+
+                <div class="tips-grid-enhanced">
+                    <div class="tip-card-enhanced">
+                        <div class="tip-icon-enhanced security-gradient">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Stay Secure</h4>
+                        <p>Only add people you know and trust. Your privacy is our priority.</p>
+                    </div>
+
+                    <div class="tip-card-enhanced">
+                        <div class="tip-icon-enhanced network-gradient">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Build Your Network</h4>
+                        <p>Connect with friends, family, and colleagues for seamless communication.</p>
+                    </div>
+
+                    <div class="tip-card-enhanced">
+                        <div class="tip-icon-enhanced global-gradient">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Global Reach</h4>
+                        <p>ZAO APP works worldwide - connect with anyone, anywhere.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Premium Modals -->
+    <!-- Email Input Modal -->
+    <div id="emailModal" class="premium-modal-enhanced hidden">
+        <div class="premium-modal-overlay-enhanced" onclick="closeModal('emailModal')"></div>
+        <div class="premium-modal-content-enhanced">
+            <div class="modal-glow-effect-enhanced"></div>
+            <div class="premium-modal-header-enhanced">
+                <div class="modal-header-icon-enhanced email-gradient">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Add by Email</h3>
+                <button class="premium-modal-close-enhanced" onclick="closeModal('emailModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="premium-modal-body-enhanced">
+                <p>Enter the email address of the person you want to connect with on ZAO APP.</p>
+                <div class="premium-input-wrapper-enhanced">
+                    <div class="input-icon-enhanced">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <input type="email" id="emailInput" placeholder="friend@example.com">
+                    <div class="input-glow-line"></div>
+                </div>
+                <div class="modal-buttons-enhanced">
+                    <button class="btn-secondary-enhanced" onclick="closeModal('emailModal')">
+                        Cancel
+                    </button>
+                    <button class="btn-primary-enhanced" onclick="addContactByEmail()">
+                        <div class="btn-glow-enhanced"></div>
+                        <i class="fas fa-plus"></i>
+                        Add Contact
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Username Input Modal -->
+    <div id="usernameModal" class="premium-modal-enhanced hidden">
+        <div class="premium-modal-overlay-enhanced" onclick="closeModal('usernameModal')"></div>
+        <div class="premium-modal-content-enhanced">
+            <div class="modal-glow-effect-enhanced"></div>
+            <div class="premium-modal-header-enhanced">
+                <div class="modal-header-icon-enhanced username-gradient">
+                    <i class="fas fa-at"></i>
+                </div>
+                <h3>Add by Username</h3>
+                <button class="premium-modal-close-enhanced" onclick="closeModal('usernameModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="premium-modal-body-enhanced">
+                <p>Enter the ZAO username to connect with them instantly.</p>
+                <div class="premium-input-wrapper-enhanced">
+                    <div class="input-icon-enhanced">
+                        <i class="fas fa-at"></i>
+                    </div>
+                    <input type="text" id="usernameInput" placeholder="ZAO-USERNAME">
+                    <div class="input-glow-line"></div>
+                </div>
+                <div class="input-help-enhanced">
+                    <i class="fas fa-info-circle"></i>
+                    <span>You can enter with or without the "ZAO-" prefix</span>
+                </div>
+                <div class="modal-buttons-enhanced">
+                    <button class="btn-secondary-enhanced" onclick="closeModal('usernameModal')">
+                        Cancel
+                    </button>
+                    <button class="btn-primary-enhanced" onclick="addContactByUsername()">
+                        <div class="btn-glow-enhanced"></div>
+                        <i class="fas fa-plus"></i>
+                        Add Contact
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div id="qrModal" class="premium-modal-enhanced hidden">
+        <div class="premium-modal-overlay-enhanced" onclick="closeModal('qrModal')"></div>
+        <div class="premium-modal-content-enhanced">
+            <div class="modal-glow-effect-enhanced"></div>
+            <div class="premium-modal-header-enhanced">
+                <div class="modal-header-icon-enhanced qr-gradient">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <h3>Your QR Code</h3>
+                <button class="premium-modal-close-enhanced" onclick="closeModal('qrModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="premium-modal-body-enhanced">
+                <div class="qr-container-premium-enhanced">
+                    <div id="qrCodeDisplay" class="qr-display-enhanced">
+                        <div class="qr-placeholder-enhanced">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                    </div>
+                    <p class="qr-description-enhanced">
+                        Share this QR code with friends so they can easily add you on ZAO APP.
+                    </p>
+                </div>
+                <div class="modal-buttons-enhanced">
+                    <button class="btn-secondary-enhanced" onclick="shareQRCode()">
+                        <i class="fas fa-share"></i>
+                        Share
+                    </button>
+                    <button class="btn-primary-enhanced" onclick="downloadQRCode()">
+                        <div class="btn-glow-enhanced"></div>
+                        <i class="fas fa-download"></i>
+                        Download
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script type="module" src="script.js"></script>
+
+    <script>
+        function goBack() {
+            window.history.back() || (window.location.href = 'chat-list.html');
+        }
+
+        async function searchUsers() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            
+            if (!query) {
+                showNotification('Please enter an email or username to search', 'error');
+                return;
+            }
+
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = '<div class="loading-premium-enhanced"><i class="fas fa-spinner fa-spin"></i> Searching for users...</div>';
+
+            try {
+                // Import supabase from the script
+                const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm');
+                const supabase = createClient('https://crmyrtgyxbmkhlzctapu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNybXlydGd5eGJta2hsemN0YXB1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU1MTEwODcsImV4cCI6MjA3MTA4NzA4N30.bbj-zsXgJU-FBMCTs_WLfk0JYiydkhmr--O2b9Iiqbc');
+                
+                let users = [];
+                const isEmail = query.includes('@');
+                
+                if (isEmail) {
+                    // Search by email
+                    const { data, error } = await supabase
+                        .from('users')
+                        .select('id, username, name, profile_picture_url, email')
+                        .ilike('email', query.toLowerCase())
+                        .limit(10);
+                    
+                    if (error) throw error;
+                    users = data || [];
+                } else {
+                    // Search by username
+                    let searchUsername = query.toUpperCase().replace(/[^A-Z0-9-]/g, '');
+                    if (!searchUsername.startsWith('ZAO-')) {
+                        searchUsername = `ZAO-${searchUsername}`;
+                    }
+                    
+                    // First try exact match
+                    const { data: exactMatch, error: exactError } = await supabase
+                        .from('users')
+                        .select('id, username, name, profile_picture_url, email')
+                        .eq('username', searchUsername)
+                        .limit(1);
+                    
+                    if (exactError) throw exactError;
+                    
+                    if (exactMatch && exactMatch.length > 0) {
+                        users = exactMatch;
+                    } else {
+                        // Try partial match
+                        const usernameWithoutPrefix = searchUsername.replace('ZAO-', '');
+                        const { data: partialMatch, error: partialError } = await supabase
+                            .from('users')
+                            .select('id, username, name, profile_picture_url, email')
+                            .ilike('username', `%${usernameWithoutPrefix}%`)
+                            .limit(10);
+                        
+                        if (partialError) throw partialError;
+                        users = partialMatch || [];
+                    }
+                }
+                
+                displaySearchResults(users);
+            } catch (error) {
+                console.error('Search error:', error);
+                resultsContainer.innerHTML = '<div class="error-premium-enhanced"><i class="fas fa-exclamation-triangle"></i> Search failed. Please try again.</div>';
+            }
+        }
+
+        function displaySearchResults(users) {
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (users.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results-premium-enhanced">
+                        <i class="fas fa-user-slash"></i>
+                        <h3>No users found</h3>
+                        <p>Try searching with a different email or username</p>
+                    </div>
+                `;
+                return;
+            }
+
+            resultsContainer.innerHTML = users.map(user => `
+                <div class="user-result-premium-enhanced">
+                    <div class="user-avatar-premium-enhanced">
+                        ${user.profile_picture_url ? 
+                            `<img src="${user.profile_picture_url}" alt="${user.name}">` :
+                            `<div class="avatar-placeholder-premium-enhanced">${user.name.charAt(0).toUpperCase()}</div>`
+                        }
+                    </div>
+                    <div class="user-info-premium-enhanced">
+                        <h4>${user.name}</h4>
+                        <p>@${user.username}</p>
+                        <span class="email-premium-enhanced">${user.email}</span>
+                    </div>
+                    <button class="add-user-btn-premium-enhanced" onclick="startChatWithUser('${user.id}', '${user.name}', '${user.username}', '${user.profile_picture_url || ''}')">
+                        <div class="btn-glow-enhanced"></div>
+                        <i class="fas fa-comments"></i>
+                        Chat
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        async function startChatWithUser(userId, name, username, profilePicture) {
+            const user = {
+                id: userId,
+                name: name,
+                username: username,
+                profile_picture_url: profilePicture
+            };
+
+            if (window.openDirectChat) {
+                localStorage.setItem('selectedContact', JSON.stringify(user));
+                window.location.href = 'chat.html';
+            } else {
+                showNotification('Chat functionality not available', 'error');
+            }
+        }
+
+        // Modal functions
+        function showEmailInput() {
+            document.getElementById('emailModal').classList.remove('hidden');
+        }
+
+        function showUsernameInput() {
+            document.getElementById('usernameModal').classList.remove('hidden');
+        }
+
+        function showQRCode() {
+            document.getElementById('qrModal').classList.remove('hidden');
+            generateQRCode();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        async function addContactByEmail() {
+            const emailInput = document.getElementById('emailInput');
+            const email = emailInput.value.trim();
+            
+            if (!email) {
+                showNotification('Please enter an email address', 'error');
+                return;
+            }
+
+            if (window.addContactByEmailOrUsername) {
+                await window.addContactByEmailOrUsername(email);
+                closeModal('emailModal');
+                emailInput.value = '';
+            }
+        }
+
+        async function addContactByUsername() {
+            const usernameInput = document.getElementById('usernameInput');
+            let username = usernameInput.value.trim();
+            
+            if (!username) {
+                showNotification('Please enter a username', 'error');
+                return;
+            }
+
+            if (!username.startsWith('ZAO-')) {
+                username = `ZAO-${username}`;
+            }
+
+            if (window.addContactByEmailOrUsername) {
+                await window.addContactByEmailOrUsername(username);
+                closeModal('usernameModal');
+                usernameInput.value = '';
+            }
+        }
+
+        function generateQRCode() {
+            // QR code generation logic would go here
+            console.log('Generating QR code...');
+        }
+
+        function shareQRCode() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Connect with me on ZAO APP',
+                    url: 'https://mceeomoba112.github.io/ZAO-APP-/'
+                });
+            } else {
+                // Fallback for browsers without Web Share API
+                navigator.clipboard.writeText('https://mceeomoba112.github.io/ZAO-APP-/');
+                showNotification('Share link copied to clipboard!', 'success');
+            }
+        }
+
+        function downloadQRCode() {
+            showNotification('QR code download feature coming soon!', 'info');
+        }
+
+        function generateShareLink() {
+            const shareLink = 'https://mceeomoba112.github.io/ZAO-APP-/';
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Join me on ZAO APP',
+                    text: 'Let\'s connect on ZAO APP for secure messaging!',
+                    url: shareLink
+                });
+            } else {
+                navigator.clipboard.writeText(shareLink);
+                showNotification('Share link copied to clipboard!', 'success');
+            }
+        }
+
+        function requestPhoneContacts() {
+            showNotification('Phone contacts import feature coming soon!', 'info');
+        }
+
+        function findNearbyUsers() {
+            showNotification('Nearby users discovery feature coming soon!', 'info');
+        }
+
+        function showNotification(message, type) {
+            if (typeof window.showMessage === 'function') {
+                window.showMessage(message, type);
+            } else {
+                alert(message);
+            }
+        }
+
+        // Search on Enter key
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        searchUsers();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
