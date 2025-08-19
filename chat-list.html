@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAO APP - Chats</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="chat-list-premium">
+        <!-- Premium Header -->
+        <div class="chat-list-header">
+            <div class="header-background">
+                <div class="gradient-overlay"></div>
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </div>
+            <div class="header-content">
+                <div class="user-profile-section">
+                    <div class="user-avatar-premium" id="userAvatar">
+                        <img id="userProfileImage" style="display: none;" />
+                        <i class="fas fa-user" id="defaultUserIcon"></i>
+                    </div>
+                    <div class="user-info-premium">
+                        <h3 id="currentUserName">User</h3>
+                        <span class="online-status-premium">
+                            <i class="fas fa-circle"></i> Online
+                        </span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="header-action-btn" onclick="openSettings()" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <button class="header-action-btn" onclick="openFindFriends()" title="Find Friends">
+                        <i class="fas fa-user-friends"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Search -->
+        <div class="premium-search-container">
+            <div class="search-card-premium">
+                <div class="search-input-container-premium">
+                    <i class="fas fa-search search-icon-premium"></i>
+                    <input 
+                        type="text" 
+                        placeholder="Search chats, contacts, messages..." 
+                        id="searchInput"
+                        autocomplete="off"
+                        oninput="filterChats()"
+                    >
+                    <button class="search-filter-btn-premium" title="Search Filters">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Tabs -->
+        <div class="chat-tabs-premium">
+            <button class="tab-btn-premium active" data-tab="all" onclick="switchTab('all')">
+                <i class="fas fa-comments"></i>
+                <span>All Chats</span>
+                <div class="tab-indicator"></div>
+            </button>
+            <button class="tab-btn-premium" data-tab="unread" onclick="switchTab('unread')">
+                <i class="fas fa-bell"></i>
+                <span>Unread</span>
+                <div class="tab-indicator"></div>
+            </button>
+            <button class="tab-btn-premium" data-tab="archived" onclick="switchTab('archived')">
+                <i class="fas fa-archive"></i>
+                <span>Archived</span>
+                <div class="tab-indicator"></div>
+            </button>
+        </div>
+
+        <!-- Chat List -->
+        <div class="chats-container-premium" id="chatsList">
+            <!-- Example chat items -->
+            <div class="chat-item-premium" onclick="openChat('ZAO-ALEX123', 'Alex Johnson')">
+                <div class="chat-avatar-premium">
+                    <div class="avatar-circle">A</div>
+                    <div class="online-indicator-premium"></div>
+                </div>
+                <div class="chat-content-premium">
+                    <div class="chat-header-row">
+                        <h4 class="contact-name">Alex Johnson</h4>
+                        <span class="chat-time">2:30 PM</span>
+                    </div>
+                    <div class="chat-preview-row">
+                        <p class="last-message">Hey! How are you doing?</p>
+                        <div class="chat-badges">
+                            <span class="unread-count">2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-item-premium" onclick="openChat('ZAO-MARIA456', 'Maria Santos')">
+                <div class="chat-avatar-premium">
+                    <div class="avatar-circle">M</div>
+                </div>
+                <div class="chat-content-premium">
+                    <div class="chat-header-row">
+                        <h4 class="contact-name">Maria Santos</h4>
+                        <span class="chat-time">Yesterday</span>
+                    </div>
+                    <div class="chat-preview-row">
+                        <p class="last-message">Thanks for the photos!</p>
+                        <div class="chat-badges">
+                            <i class="fas fa-check-double read-status"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-item-premium" onclick="openChat('ZAO-JOHN789', 'John Smith')">
+                <div class="chat-avatar-premium">
+                    <div class="avatar-circle">J</div>
+                    <div class="online-indicator-premium"></div>
+                </div>
+                <div class="chat-content-premium">
+                    <div class="chat-header-row">
+                        <h4 class="contact-name">John Smith</h4>
+                        <span class="chat-time">Monday</span>
+                    </div>
+                    <div class="chat-preview-row">
+                        <p class="last-message">Let's meet up this weekend</p>
+                        <div class="chat-badges">
+                            <i class="fas fa-check read-status"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No chats placeholder -->
+            <div class="no-chats-placeholder-premium" id="noChatsPlaceholder" style="display: none;">
+                <div class="placeholder-content-premium">
+                    <div class="placeholder-icon-premium">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>No conversations yet</h3>
+                    <p>Start a conversation by adding a contact</p>
+                    <button class="start-chat-btn-premium" onclick="showAddContactModal()">
+                        <i class="fas fa-plus"></i> Start New Chat
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Action Button -->
+        <button class="fab-premium" onclick="showAddContactModal()" title="New Chat">
+            <i class="fas fa-plus"></i>
+            <div class="fab-ripple"></div>
+        </button>
+    </div>
+
+    <!-- Add Contact Modal -->
+    <div id="addContactModal" class="premium-modal hidden">
+        <div class="premium-modal-content">
+            <div class="premium-modal-header">
+                <h3><i class="fas fa-user-plus"></i> Add New Contact</h3>
+                <button class="premium-modal-close" onclick="closeModal('addContactModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="premium-modal-body">
+                <div class="add-contact-options-premium">
+                    <div class="contact-option-premium" onclick="showEmailInput()">
+                        <div class="option-icon-premium email-gradient">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="option-content-premium">
+                            <h4>Add by Email</h4>
+                            <p>Enter contact's email address</p>
+                        </div>
+                        <div class="option-arrow-premium">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                    <div class="contact-option-premium" onclick="requestPhoneContacts()">
+                        <div class="option-icon-premium contacts-gradient">
+                            <i class="fas fa-address-book"></i>
+                        </div>
+                        <div class="option-content-premium">
+                            <h4>Import from Phone</h4>
+                            <p>Sync your phone contacts</p>
+                        </div>
+                        <div class="option-arrow-premium">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="email-input-section-premium hidden" id="emailInputSection">
+                    <div class="premium-input-wrapper">
+                        <i class="fas fa-envelope input-icon-premium"></i>
+                        <input type="email" id="contactEmail" placeholder="Enter contact's email address">
+                    </div>
+                    <div class="premium-modal-buttons">
+                        <button class="premium-modal-btn primary" onclick="addContactByEmail()">
+                            <i class="fas fa-plus"></i> Add Contact
+                        </button>
+                        <button class="premium-modal-btn secondary" onclick="closeModal('addContactModal')">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-navigation">
+        <button class="nav-btn active" onclick="stayOnChatList()" data-nav="chats">
+            <i class="fas fa-comments"></i>
+            <span>Chats</span>
+        </button>
+        <button class="nav-btn" onclick="openFindFriends()" data-nav="find-friends">
+            <i class="fas fa-user-friends"></i>
+            <span>Find Friends</span>
+        </button>
+        <button class="nav-btn" onclick="showAddContactModal()" data-nav="add-contact">
+            <i class="fas fa-user-plus"></i>
+            <span>Add Contact</span>
+        </button>
+        <button class="nav-btn" onclick="openSettings()" data-nav="settings">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script type="module" src="script.js"></script>
+    <script>
+        // Load user info
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserInfo();
+        });
+
+        function loadUserInfo() {
+            const storedUser = localStorage.getItem('currentUser');
+            if (storedUser) {
+                const user = JSON.parse(storedUser);
+                document.getElementById('currentUserName').textContent = user.name || 'User';
+
+                // Load profile picture if exists
+                const profilePicture = localStorage.getItem('profilePicture');
+                if (profilePicture) {
+                    document.getElementById('userProfileImage').src = profilePicture;
+                    document.getElementById('userProfileImage').style.display = 'block';
+                    document.getElementById('defaultUserIcon').style.display = 'none';
+                }
+            }
+        }
+
+        function openChat(username, contactName) {
+            // Store the selected contact info
+            localStorage.setItem('selectedContact', JSON.stringify({
+                username: username,
+                name: contactName
+            }));
+            
+            // Navigate to chat page
+            window.location.href = 'chat.html';
+        }
+
+        function switchTab(tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-btn-premium').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Add active class to clicked tab
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            
+            // Filter chats based on tab
+            filterChatsByTab(tabName);
+        }
+
+        function filterChatsByTab(tab) {
+            const chatItems = document.querySelectorAll('.chat-item-premium');
+            
+            chatItems.forEach(item => {
+                switch(tab) {
+                    case 'unread':
+                        const hasUnread = item.querySelector('.unread-count');
+                        item.style.display = hasUnread ? 'flex' : 'none';
+                        break;
+                    case 'archived':
+                        // For now, hide all items for archived (implement archive logic later)
+                        item.style.display = 'none';
+                        break;
+                    case 'all':
+                    default:
+                        item.style.display = 'flex';
+                        break;
+                }
+            });
+        }
+
+        function filterChats() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const chatItems = document.querySelectorAll('.chat-item-premium');
+            
+            chatItems.forEach(item => {
+                const contactName = item.querySelector('.contact-name').textContent.toLowerCase();
+                const lastMessage = item.querySelector('.last-message').textContent.toLowerCase();
+                
+                if (contactName.includes(searchTerm) || lastMessage.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function stayOnChatList() {
+            // Already on chat list, just update nav
+            updateBottomNavigation('chats');
+        }
+
+        function openSettings() {
+            window.location.href = 'settings.html';
+        }
+
+        function openFindFriends() {
+            window.location.href = 'find-friend.html';
+        }
+
+        function showAddContactModal() {
+            document.getElementById('addContactModal').classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            // Reset email input section
+            const emailSection = document.getElementById('emailInputSection');
+            if (emailSection) {
+                emailSection.classList.add('hidden');
+            }
+        }
+
+        function showEmailInput() {
+            document.getElementById('emailInputSection').classList.remove('hidden');
+        }
+
+        function requestPhoneContacts() {
+            showNotification('Phone contacts import coming soon!', 'info');
+        }
+
+        function addContactByEmail() {
+            const email = document.getElementById('contactEmail').value.trim();
+            if (!email) {
+                showNotification('Please enter an email address', 'error');
+                return;
+            }
+            
+            showNotification('Contact request sent!', 'success');
+            closeModal('addContactModal');
+            document.getElementById('contactEmail').value = '';
+        }
+
+        function updateBottomNavigation(activeNav) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-nav="${activeNav}"]`).classList.add('active');
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification-premium ${type}`;
+            notification.textContent = message;
+
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+
+            if (type === 'success') notification.style.background = '#28a745';
+            else if (type === 'error') notification.style.background = '#dc3545';
+            else notification.style.background = '#007bff';
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

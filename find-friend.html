@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAO APP - Find Friends</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="find-friends-premium">
+        <!-- Premium Header -->
+        <div class="premium-header">
+            <div class="header-background">
+                <div class="gradient-overlay"></div>
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </div>
+            <div class="header-content">
+                <button class="premium-back-btn" onclick="goBackToChat()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="header-text">
+                    <h1 class="premium-title">
+                        <span class="title-gradient">Discover</span> Friends
+                    </h1>
+                    <p class="premium-subtitle">Connect with people worldwide and earn rewards</p>
+                    <div class="premium-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">1.2M+</div>
+                            <div class="stat-label">Active Users</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-number">50K+</div>
+                            <div class="stat-label">Daily Connections</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-number">$75</div>
+                            <div class="stat-label">Invite Reward</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Content -->
+        <div class="premium-content">
+            <!-- Connection Methods -->
+            <div class="connection-methods">
+                <div class="section-header-premium">
+                    <h2>
+                        <i class="fas fa-users-cog"></i>
+                        Connection Methods
+                    </h2>
+                    <p>Choose how you'd like to connect with friends</p>
+                </div>
+
+                <div class="methods-grid">
+                    <div class="method-card premium-card" onclick="shareUsername()">
+                        <div class="card-glow"></div>
+                        <div class="method-icon share-gradient">
+                            <i class="fas fa-share-alt-square"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>Share Username</h3>
+                            <p>Let others find you by your unique ZAO username</p>
+                            <div class="method-badge">
+                                <i class="fas fa-star"></i>
+                                Most Popular
+                            </div>
+                        </div>
+                        <div class="method-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <div class="method-card premium-card" onclick="enableDiscovery()">
+                        <div class="card-glow"></div>
+                        <div class="method-icon discovery-gradient">
+                            <i class="fas fa-broadcast-tower"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>Let Others Find You Easily</h3>
+                            <p>Appear in friend suggestions and discovery feeds</p>
+                            <div class="method-badge verified">
+                                <i class="fas fa-shield-check"></i>
+                                Verified Safe
+                            </div>
+                        </div>
+                        <div class="method-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <div class="method-card premium-card" onclick="showNearbyUsers()">
+                        <div class="card-glow"></div>
+                        <div class="method-icon location-gradient">
+                            <i class="fas fa-satellite-dish"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>People Nearby</h3>
+                            <p>Discover local connections and communities</p>
+                            <div class="method-badge location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Location Based
+                            </div>
+                        </div>
+                        <div class="method-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <div class="method-card premium-card" onclick="generateInviteCode()">
+                        <div class="card-glow"></div>
+                        <div class="method-icon invite-gradient">
+                            <i class="fas fa-gift-card"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>Invite Code</h3>
+                            <p>Earn $75 for every 5 successful invites</p>
+                            <div class="method-badge reward">
+                                <i class="fas fa-dollar-sign"></i>
+                                $75 Reward
+                            </div>
+                        </div>
+                        <div class="method-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <div class="method-card premium-card" onclick="importContacts()">
+                        <div class="card-glow"></div>
+                        <div class="method-icon contacts-gradient">
+                            <i class="fas fa-address-card"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>Import Contacts</h3>
+                            <p>Find friends from your phone contacts instantly</p>
+                            <div class="method-badge contacts">
+                                <i class="fas fa-mobile-alt"></i>
+                                Phone Sync
+                            </div>
+                        </div>
+                        <div class="method-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <div class="method-card premium-card" onclick="showAddContactModal()">
+                        <div class="card-glow"></div>
+                        <div class="method-icon add-gradient">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>Add New Contact</h3>
+                            <p>Manually add friends by email or username</p>
+                            <div class="method-badge manual">
+                                <i class="fas fa-hand-point-up"></i>
+                                Manual Add
+                            </div>
+                        </div>
+                        <div class="method-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pro Tips Section -->
+            <div class="pro-tips-section">
+                <div class="section-header-premium">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i>
+                        Pro Tips for Finding Friends
+                    </h2>
+                    <p>Expert strategies to build your network</p>
+                </div>
+
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h4>Complete Your Profile</h4>
+                        <p>Users with complete profiles get 3x more friend requests</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h4>Add a Profile Picture</h4>
+                        <p>Profile photos increase connection rates by 85%</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-hashtag"></i>
+                        </div>
+                        <h4>Share Your Username</h4>
+                        <p>Post your ZAO username on social media platforms</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h4>Use Invite Codes</h4>
+                        <p>Earn rewards while helping friends join the platform</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Join Communities</h4>
+                        <p>Participate in local groups and interest-based chats</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Stay Safe</h4>
+                        <p>Always verify users and report suspicious activity</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Your Connections</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Invites Sent</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-value">$0</div>
+                    <div class="stat-label">Rewards Earned</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Add Contact Modal -->
+    <div id="addContactModal" class="premium-modal hidden">
+        <div class="premium-modal-content">
+            <div class="premium-modal-header">
+                <h3><i class="fas fa-user-plus"></i> Add New Contact</h3>
+                <button class="premium-modal-close" onclick="closeModal('addContactModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="premium-modal-body">
+                <div class="add-contact-options-premium">
+                    <div class="contact-option-premium" onclick="showEmailInput()">
+                        <div class="option-icon-premium email-gradient">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="option-content-premium">
+                            <h4>Add by Email</h4>
+                            <p>Enter contact's email address</p>
+                        </div>
+                        <div class="option-arrow-premium">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <div class="contact-option-premium" onclick="showUsernameInput()">
+                        <div class="option-icon-premium username-gradient">
+                            <i class="fas fa-at"></i>
+                        </div>
+                        <div class="option-content-premium">
+                            <h4>Add by Username</h4>
+                            <p>Enter their ZAO username</p>
+                        </div>
+                        <div class="option-arrow-premium">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <div class="contact-option-premium" onclick="requestPhoneContacts()">
+                        <div class="option-icon-premium contacts-gradient">
+                            <i class="fas fa-address-book"></i>
+                        </div>
+                        <div class="option-content-premium">
+                            <h4>Import from Phone</h4>
+                            <p>Sync your phone contacts</p>
+                        </div>
+                        <div class="option-arrow-premium">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="email-input-section-premium hidden" id="emailInputSection">
+                    <div class="premium-input-wrapper">
+                        <i class="fas fa-envelope input-icon-premium"></i>
+                        <input type="email" id="contactEmail" placeholder="Enter contact's email address">
+                    </div>
+                    <div class="premium-modal-buttons">
+                        <button class="premium-modal-btn primary" onclick="addContactByEmail()">
+                            <i class="fas fa-plus"></i> Add Contact
+                        </button>
+                        <button class="premium-modal-btn secondary" onclick="closeModal('addContactModal')">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+
+                <div class="username-input-section-premium hidden" id="usernameInputSection">
+                    <div class="premium-input-wrapper">
+                        <i class="fas fa-at input-icon-premium"></i>
+                        <input type="text" id="contactUsername" placeholder="Enter ZAO username">
+                    </div>
+                    <div class="premium-modal-buttons">
+                        <button class="premium-modal-btn primary" onclick="addContactByUsername()">
+                            <i class="fas fa-plus"></i> Add Contact
+                        </button>
+                        <button class="premium-modal-btn secondary" onclick="closeModal('addContactModal')">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-navigation">
+        <button class="nav-btn" onclick="switchToChats()" data-nav="chats">
+            <i class="fas fa-comments"></i>
+            <span>Chats</span>
+        </button>
+        <button class="nav-btn active" onclick="openFindFriends()" data-nav="find-friends">
+            <i class="fas fa-user-friends"></i>
+            <span>Find Friends</span>
+        </button>
+        <button class="nav-btn" onclick="showAddContactModal()" data-nav="add-contact">
+            <i class="fas fa-user-plus"></i>
+            <span>Add Contact</span>
+        </button>
+        <button class="nav-btn" onclick="openSettings()" data-nav="settings">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+    <script type="module" src="script.js"></script>
+
+    <script>
+        // Find Friends Functions
+        function goBackToChat() {
+            window.location.href = 'chat.html';
+        }
+
+        function shareUsername() {
+            const username = localStorage.getItem('userUsername') || 'ZAO-USER123';
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Connect with me on ZAO',
+                    text: `Add me on ZAO APP! My username is: ${username}`,
+                });
+            } else {
+                navigator.clipboard.writeText(username).then(() => {
+                    showNotification('Username copied to clipboard!', 'success');
+                });
+            }
+        }
+
+        function enableDiscovery() {
+            const preferences = JSON.parse(localStorage.getItem('userPreferences') || '{}');
+            preferences.discoverable = !preferences.discoverable;
+            localStorage.setItem('userPreferences', JSON.stringify(preferences));
+
+            const status = preferences.discoverable ? 'enabled' : 'disabled';
+            showNotification(`Discovery ${status}!`, 'success');
+        }
+
+        function showNearbyUsers() {
+            showNotification('Nearby users feature coming soon!', 'info');
+        }
+
+        function generateInviteCode() {
+            const inviteCode = 'ZAO' + Math.random().toString(36).substr(2, 6).toUpperCase();
+            const inviteLink = `${window.location.origin}/index.html?invite=${inviteCode}`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Join me on ZAO APP',
+                    text: `Join me on ZAO APP and we both earn $15! Use code: ${inviteCode}`,
+                    url: inviteLink
+                });
+            } else {
+                navigator.clipboard.writeText(`Join me on ZAO APP! Use code: ${inviteCode} - ${inviteLink}`).then(() => {
+                    showNotification('Invite code copied to clipboard!', 'success');
+                });
+            }
+        }
+
+        function importContacts() {
+            showNotification('Contact import feature coming soon!', 'info');
+        }
+
+        function showAddContactModal() {
+            document.getElementById('addContactModal').classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            // Reset input sections
+            document.getElementById('emailInputSection').classList.add('hidden');
+            document.getElementById('usernameInputSection').classList.add('hidden');
+        }
+
+        function showEmailInput() {
+            document.getElementById('emailInputSection').classList.remove('hidden');
+            document.getElementById('usernameInputSection').classList.add('hidden');
+        }
+
+        function showUsernameInput() {
+            document.getElementById('usernameInputSection').classList.remove('hidden');
+            document.getElementById('emailInputSection').classList.add('hidden');
+        }
+
+        function requestPhoneContacts() {
+            showNotification('Phone contacts import coming soon!', 'info');
+        }
+
+        function addContactByEmail() {
+            const email = document.getElementById('contactEmail').value.trim();
+            if (!email) {
+                showNotification('Please enter an email address', 'error');
+                return;
+            }
+            showNotification('Contact request sent!', 'success');
+            closeModal('addContactModal');
+            document.getElementById('contactEmail').value = '';
+        }
+
+        function addContactByUsername() {
+            const username = document.getElementById('contactUsername').value.trim();
+            if (!username) {
+                showNotification('Please enter a username', 'error');
+                return;
+            }
+            showNotification('Contact request sent!', 'success');
+            closeModal('addContactModal');
+            document.getElementById('contactUsername').value = '';
+        }
+
+        function switchToChats() {
+            window.location.href = 'chat.html';
+        }
+
+        function openFindFriends() {
+            // Already on find friends page
+        }
+
+        function openSettings() {
+            window.location.href = 'settings.html';
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+
+            if (type === 'success') notification.style.background = '#28a745';
+            else if (type === 'error') notification.style.background = '#dc3545';
+            else notification.style.background = '#007bff';
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+    </script>

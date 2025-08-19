@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZAO APP - Chat</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="whatsapp-container">
+    <!-- Left Sidebar - Chat List -->
+    <div class="chat-sidebar">
+      <!-- Sidebar Header -->
+      <div class="sidebar-header">
+        <div class="user-profile-section">
+          <div class="user-avatar" id="userAvatar">
+            <img id="userProfileImage" style="display: none;" />
+            <i class="fas fa-user" id="defaultUserIcon"></i>
+          </div>
+          <div class="user-info">
+            <h3 id="currentUserName">User</h3>
+            <span class="online-status">
+              <i class="fas fa-circle"></i> Online
+            </span>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Enhanced Search -->
+      <div class="search-container">
+        <div class="search-wrapper">
+          <div class="search-input-container">
+            <i class="fas fa-search search-icon"></i>
+            <input 
+              type="text" 
+              placeholder="Search chats, contacts, messages..." 
+              id="searchInput"
+              autocomplete="off"
+            >
+            <button class="search-filter-btn" title="Search Filters">
+              <i class="fas fa-filter"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat List Section -->
+      <div class="chat-list-section">
+        <div class="chat-list-header">
+          <div class="section-tabs">
+            <button class="tab-btn active" data-tab="all">
+              All Chats
+            </button>
+            <button class="tab-btn" data-tab="unread">
+              Unread
+            </button>
+            <button class="tab-btn" data-tab="archived">
+              Archived
+            </button>
+          </div>
+          <button class="new-chat-fab" onclick="showAddContactModal()" title="New Chat">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+
+        <!-- Chat List -->
+        <div class="chats-container" id="contactsList">
+          <!-- Chats will be loaded here -->
+          <div class="no-chats-placeholder">
+            <div class="placeholder-content">
+              <i class="fas fa-comments placeholder-icon"></i>
+              <h3>No chats yet</h3>
+              <p>Start a conversation by adding a contact</p>
+              <button class="start-chat-btn" onclick="showAddContactModal()">
+                <i class="fas fa-plus"></i> Start New Chat
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Chat Area -->
+    <div class="chat-conversation">
+      <!-- Chat Header -->
+      <div class="conversation-header">
+        <div class="chat-contact-info">
+          <div class="back-btn-mobile" onclick="goBackToChatList()">
+            <i class="fas fa-arrow-left"></i>
+          </div>
+          <div class="contact-avatar-section">
+            <div class="contact-avatar" id="currentChatAvatar">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="online-indicator"></div>
+          </div>
+          <div class="contact-details">
+            <h3 id="currentChatUser">Select a chat to start messaging</h3>
+            <span class="contact-status" id="contactStatus">Click on a contact to view here</span>
+          </div>
+        </div>
+
+        <div class="conversation-actions">
+          <button class="conv-action-btn" title="Search in chat">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="conv-action-btn" title="Voice call">
+            <i class="fas fa-phone"></i>
+          </button>
+          <button class="conv-action-btn" title="Video call">
+            <i class="fas fa-video"></i>
+          </button>
+          <div class="action-dropdown">
+            <button class="conv-action-btn dropdown-toggle" title="More options">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="#"><i class="fas fa-user"></i> View Contact</a>
+              <a href="#"><i class="fas fa-bell-slash"></i> Mute</a>
+              <a href="#"><i class="fas fa-archive"></i> Archive</a>
+              <a href="#"><i class="fas fa-trash"></i> Delete Chat</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages Area -->
+      <div class="messages-container" id="messagesContainer">
+        <div class="welcome-screen">
+          <div class="welcome-content">
+            <div class="zao-logo">
+              <i class="fas fa-comments"></i>
+            </div>
+            <h2>Welcome to ZAO APP</h2>
+            <p class="welcome-text">
+              Send and receive messages securely.<br>
+              Your personal messages are protected with end-to-end encryption.
+            </p>
+            <div class="welcome-features">
+              <div class="feature-item">
+                <i class="fas fa-lock"></i>
+                <span>End-to-end encrypted</span>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Secure & Private</span>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-globe"></i>
+                <span>Connect worldwide</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message Input Area -->
+      <div class="message-input-section">
+        <div class="input-wrapper">
+          <!-- Attachment button -->
+          <button class="input-action-btn attachment-btn" title="Attach files" onclick="openMediaSelector()">
+            <i class="fas fa-plus"></i>
+            <input type="file" id="mediaInput" accept="image/*,video/*,audio/*,.pdf,.doc,.docx" hidden multiple>
+          </button>
+
+          <!-- Message input container -->
+          <div class="message-input-container">
+            <div class="input-field-wrapper">
+              <input 
+                type="text" 
+                id="messageInput" 
+                placeholder="Type a message..." 
+                disabled
+                autocomplete="off"
+                maxlength="1000"
+              >
+              <div class="input-actions">
+                <button class="emoji-btn" title="Emoji" onclick="toggleEmojiPicker()">
+                  <i class="fas fa-smile"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Emoji Picker -->
+            <div class="emoji-picker hidden" id="emojiPicker">
+              <div class="emoji-grid">
+                <span onclick="insertEmoji('😀')">😀</span>
+                <span onclick="insertEmoji('😃')">😃</span>
+                <span onclick="insertEmoji('😄')">😄</span>
+                <span onclick="insertEmoji('😁')">😁</span>
+                <span onclick="insertEmoji('😅')">😅</span>
+                <span onclick="insertEmoji('😂')">😂</span>
+                <span onclick="insertEmoji('🤣')">🤣</span>
+                <span onclick="insertEmoji('😊')">😊</span>
+                <span onclick="insertEmoji('😇')">😇</span>
+                <span onclick="insertEmoji('🙂')">🙂</span>
+                <span onclick="insertEmoji('😉')">😉</span>
+                <span onclick="insertEmoji('😌')">😌</span>
+                <span onclick="insertEmoji('😍')">😍</span>
+                <span onclick="insertEmoji('🥰')">🥰</span>
+                <span onclick="insertEmoji('😘')">😘</span>
+                <span onclick="insertEmoji('😗')">😗</span>
+                <span onclick="insertEmoji('😙')">😙</span>
+                <span onclick="insertEmoji('😚')">😚</span>
+                <span onclick="insertEmoji('😋')">😋</span>
+                <span onclick="insertEmoji('😛')">😛</span>
+                <span onclick="insertEmoji('😝')">😝</span>
+                <span onclick="insertEmoji('😜')">😜</span>
+                <span onclick="insertEmoji('🤪')">🤪</span>
+                <span onclick="insertEmoji('🤨')">🤨</span>
+                <span onclick="insertEmoji('🧐')">🧐</span>
+                <span onclick="insertEmoji('🤓')">🤓</span>
+                <span onclick="insertEmoji('😎')">😎</span>
+                <span onclick="insertEmoji('🤩')">🤩</span>
+                <span onclick="insertEmoji('🥳')">🥳</span>
+                <span onclick="insertEmoji('😏')">😏</span>
+                <span onclick="insertEmoji('😒')">😒</span>
+                <span onclick="insertEmoji('😞')">😞</span>
+                <span onclick="insertEmoji('😔')">😔</span>
+                <span onclick="insertEmoji('😟')">😟</span>
+                <span onclick="insertEmoji('😕')">😕</span>
+                <span onclick="insertEmoji('🙁')">🙁</span>
+                <span onclick="insertEmoji('☹️')">☹️</span>
+                <span onclick="insertEmoji('😣')">😣</span>
+                <span onclick="insertEmoji('😖')">😖</span>
+                <span onclick="insertEmoji('😫')">😫</span>
+                <span onclick="insertEmoji('😩')">😩</span>
+                <span onclick="insertEmoji('🥺')">🥺</span>
+                <span onclick="insertEmoji('😢')">😢</span>
+                <span onclick="insertEmoji('😭')">😭</span>
+                <span onclick="insertEmoji('😤')">😤</span>
+                <span onclick="insertEmoji('😠')">😠</span>
+                <span onclick="insertEmoji('😡')">😡</span>
+                <span onclick="insertEmoji('🤬')">🤬</span>
+                <span onclick="insertEmoji('🤯')">🤯</span>
+                <span onclick="insertEmoji('😳')">😳</span>
+                <span onclick="insertEmoji('🥵')">🥵</span>
+                <span onclick="insertEmoji('🥶')">🥶</span>
+                <span onclick="insertEmoji('😱')">😱</span>
+                <span onclick="insertEmoji('😨')">😨</span>
+                <span onclick="insertEmoji('😰')">😰</span>
+                <span onclick="insertEmoji('😥')">😥</span>
+                <span onclick="insertEmoji('😓')">😓</span>
+                <span onclick="insertEmoji('🤗')">🤗</span>
+                <span onclick="insertEmoji('🤔')">🤔</span>
+                <span onclick="insertEmoji('🤭')">🤭</span>
+                <span onclick="insertEmoji('🤫')">🤫</span>
+                <span onclick="insertEmoji('🤥')">🤥</span>
+                <span onclick="insertEmoji('😶')">😶</span>
+                <span onclick="insertEmoji('😐')">😐</span>
+                <span onclick="insertEmoji('😑')">😑</span>
+                <span onclick="insertEmoji('😬')">😬</span>
+                <span onclick="insertEmoji('🙄')">🙄</span>
+                <span onclick="insertEmoji('😯')">😯</span>
+                <span onclick="insertEmoji('😦')">😦</span>
+                <span onclick="insertEmoji('😧')">😧</span>
+                <span onclick="insertEmoji('😮')">😮</span>
+                <span onclick="insertEmoji('😲')">😲</span>
+                <span onclick="insertEmoji('🥱')">🥱</span>
+                <span onclick="insertEmoji('😴')">😴</span>
+                <span onclick="insertEmoji('🤤')">🤤</span>
+                <span onclick="insertEmoji('😪')">😪</span>
+                <span onclick="insertEmoji('😵')">😵</span>
+                <span onclick="insertEmoji('🤐')">🤐</span>
+                <span onclick="insertEmoji('🥴')">🥴</span>
+                <span onclick="insertEmoji('🤢')">🤢</span>
+                <span onclick="insertEmoji('🤮')">🤮</span>
+                <span onclick="insertEmoji('🤧')">🤧</span>
+                <span onclick="insertEmoji('😷')">😷</span>
+                <span onclick="insertEmoji('🤒')">🤒</span>
+                <span onclick="insertEmoji('🤕')">🤕</span>
+                <span onclick="insertEmoji('🤑')">🤑</span>
+                <span onclick="insertEmoji('🤠')">🤠</span>
+                <span onclick="insertEmoji('😈')">😈</span>
+                <span onclick="insertEmoji('👿')">👿</span>
+                <span onclick="insertEmoji('👹')">👹</span>
+                <span onclick="insertEmoji('👺')">👺</span>
+                <span onclick="insertEmoji('🤡')">🤡</span>
+                <span onclick="insertEmoji('💩')">💩</span>
+                <span onclick="insertEmoji('👻')">👻</span>
+                <span onclick="insertEmoji('💀')">💀</span>
+                <span onclick="insertEmoji('☠️')">☠️</span>
+                <span onclick="insertEmoji('👽')">👽</span>
+                <span onclick="insertEmoji('👾')">👾</span>
+                <span onclick="insertEmoji('🤖')">🤖</span>
+                <span onclick="insertEmoji('🎃')">🎃</span>
+                <span onclick="insertEmoji('😺')">😺</span>
+                <span onclick="insertEmoji('😸')">😸</span>
+                <span onclick="insertEmoji('😹')">😹</span>
+                <span onclick="insertEmoji('😻')">😻</span>
+                <span onclick="insertEmoji('😼')">😼</span>
+                <span onclick="insertEmoji('😽')">😽</span>
+                <span onclick="insertEmoji('🙀')">🙀</span>
+                <span onclick="insertEmoji('😿')">😿</span>
+                <span onclick="insertEmoji('😾')">😾</span>
+                <span onclick="insertEmoji('❤️')">❤️</span>
+                <span onclick="insertEmoji('🧡')">🧡</span>
+                <span onclick="insertEmoji('💛')">💛</span>
+                <span onclick="insertEmoji('💚')">💚</span>
+                <span onclick="insertEmoji('💙')">💙</span>
+                <span onclick="insertEmoji('💜')">💜</span>
+                <span onclick="insertEmoji('🤎')">🤎</span>
+                <span onclick="insertEmoji('🖤')">🖤</span>
+                <span onclick="insertEmoji('🤍')">🤍</span>
+                <span onclick="insertEmoji('👍')">👍</span>
+                <span onclick="insertEmoji('👎')">👎</span>
+                <span onclick="insertEmoji('👏')">👏</span>
+                <span onclick="insertEmoji('🙌')">🙌</span>
+                <span onclick="insertEmoji('👐')">👐</span>
+                <span onclick="insertEmoji('🤲')">🤲</span>
+                <span onclick="insertEmoji('🤝')">🤝</span>
+                <span onclick="insertEmoji('🙏')">🙏</span>
+                <span onclick="insertEmoji('✌️')">✌️</span>
+                <span onclick="insertEmoji('🤞')">🤞</span>
+                <span onclick="insertEmoji('🤟')">🤟</span>
+                <span onclick="insertEmoji('🤘')">🤘</span>
+                <span onclick="insertEmoji('🤙')">🤙</span>
+                <span onclick="insertEmoji('👈')">👈</span>
+                <span onclick="insertEmoji('👉')">👉</span>
+                <span onclick="insertEmoji('👆')">👆</span>
+                <span onclick="insertEmoji('🖕')">🖕</span>
+                <span onclick="insertEmoji('👇')">👇</span>
+                <span onclick="insertEmoji('☝️')">☝️</span>
+                <span onclick="insertEmoji('👍')">👍</span>
+                <span onclick="insertEmoji('👎')">👎</span>
+                <span onclick="insertEmoji('👊')">👊</span>
+                <span onclick="insertEmoji('✊')">✊</span>
+                <span onclick="insertEmoji('🤛')">🤛</span>
+                <span onclick="insertEmoji('🤜')">🤜</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Send/Record button -->
+          <button class="send-btn" id="sendButton" disabled onclick="sendMessage()">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <div id="addContactModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-user-plus"></i> Add New Contact</h3>
+        <button class="modal-close" onclick="closeModal('addContactModal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="add-contact-options">
+          <div class="contact-option" onclick="showEmailInput()">
+            <div class="option-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="option-content">
+              <h4>Add by Email</h4>
+              <p>Enter contact's email address</p>
+            </div>
+          </div>
+          <div class="contact-option" onclick="requestPhoneContacts()">
+            <div class="option-icon">
+              <i class="fas fa-address-book"></i>
+            </div>
+            <div class="option-content">
+              <h4>Import from Phone</h4>
+              <p>Sync your phone contacts</p>
+            </div>
+          </div>
+        </div>
+        <div class="email-input-section hidden" id="emailInputSection">
+          <div class="input-group">
+            <input type="email" id="contactEmail" placeholder="Enter contact's email address">
+          </div>
+          <div class="modal-buttons">
+            <button class="btn-primary" onclick="addContactByEmail()">
+              <i class="fas fa-plus"></i> Add Contact
+            </button>
+            <button class="btn-secondary" onclick="closeModal('addContactModal')">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <script type="module" src="script.js"></script>
+
+  <script>
+    // Initialize permissions when chat page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load selected contact if coming from chat list
+      loadSelectedContact();
+      
+      // Small delay to ensure scripts are loaded
+      setTimeout(() => {
+        if (window.permissionManager) {
+          window.permissionManager.checkAndRequestPermissions();
+        }
+      }, 1000);
+    });
+
+    function loadSelectedContact() {
+      const selectedContact = localStorage.getItem('selectedContact');
+      if (selectedContact) {
+        const contact = JSON.parse(selectedContact);
+        document.getElementById('currentChatUser').textContent = contact.name;
+        document.getElementById('contactStatus').textContent = `@${contact.username} • Online`;
+        
+        // Show online indicator
+        document.querySelector('.online-indicator').style.display = 'block';
+        
+        // Update avatar with first letter of name
+        const avatarElement = document.getElementById('currentChatAvatar');
+        avatarElement.innerHTML = contact.name.charAt(0).toUpperCase();
+        
+        // Enable message input
+        const messageInput = document.getElementById('messageInput');
+        if (messageInput) {
+          messageInput.disabled = false;
+          messageInput.placeholder = `Message ${contact.name}...`;
+        }
+        
+        // Enable send button
+        const sendButton = document.getElementById('sendButton');
+        if (sendButton) {
+          sendButton.disabled = false;
+        }
+        
+        // Hide welcome screen and show messages container
+        const welcomeScreen = document.querySelector('.welcome-screen');
+        if (welcomeScreen) {
+          welcomeScreen.style.display = 'none';
+        }
+        
+        // Clear selected contact to prevent stale data
+        localStorage.removeItem('selectedContact');
+      }
+    }
+  </script>
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-navigation">
+    <button class="nav-btn active" onclick="switchToChats()" data-nav="chats">
+      <i class="fas fa-comments"></i>
+      <span>Chats</span>
+    </button>
+    <button class="nav-btn" onclick="openFindFriends()" data-nav="find-friends">
+      <i class="fas fa-user-friends"></i>
+      <span>Find Friends</span>
+    </button>
+    <button class="nav-btn" onclick="showAddContactModal()" data-nav="add-contact">
+      <i class="fas fa-user-plus"></i>
+      <span>Add Contact</span>
+    </button>
+    <button class="nav-btn" onclick="openSettings()" data-nav="settings">
+      <i class="fas fa-cog"></i>
+      <span>Settings</span>
+    </button>
+  </div>
+
+  <script>
+    // Bottom navigation functionality
+    function switchToChats() {
+      updateBottomNavigation('chats');
+    }
+
+    function updateBottomNavigation(activeNav) {
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`[data-nav="${activeNav}"]`).classList.add('active');
+    }
+
+    // Mobile responsiveness
+    function goBackToChatList() {
+      document.querySelector('.chat-sidebar').style.display = 'flex';
+      document.querySelector('.chat-conversation').style.display = 'none';
+    }
+
+    // Tab switching
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const tab = btn.dataset.tab;
+          filterChats(tab);
+        });
+      });
+    });
+
+    function filterChats(filter) {
+      // Implementation for filtering chats
+      console.log('Filtering chats by:', filter);
+    }
+
+    // Dropdown menus
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.action-dropdown')) {
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+          menu.style.display = 'none';
+        });
+      }
+    });
+
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const menu = toggle.nextElementSibling;
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+  </script>
+</body>
+</html>
+
